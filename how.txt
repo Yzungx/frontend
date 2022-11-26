@@ -1,0 +1,2 @@
+component viet cac ... dung nhieu noi
+cotainer: viet de dung
