@@ -1,2 +1,8 @@
 component viet cac ... dung nhieu noi
 cotainer: viet de dung
+_____________________________________________
+life cycle:
+*run component
+1. run contructor -> init state: khoi tao cac state ban dau
+2. func DidMount(set state) ~ goi api de lay data tu BE set lai state
+3. render
