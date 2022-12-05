@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllUser } from '../../services/userService';
+import { getAllUser, createNewUserService } from '../../services/userService';
 import './UserManage.scss'
 import ModalUser from './ModalUser';
+// import { reject } from 'lodash';
 class UserManage extends Component {
     // khoi tao state
     constructor(props) {
@@ -15,19 +16,19 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
+        await this.getAllUserFromReact();
+    }
+
+    getAllUserFromReact = async () => {
         let response = await getAllUser('All')
         if (response && response.errCode === "0") {
             this.setState({
                 arrUsers: response.users,
-            }, () => {
-                console.log('check state user sau khi ham chay xong: ', this.state.arrUsers);
-
             })
-            console.log('check state user 1: ', this.state.arrUsers);
         }
     }
 
-    handleAddNewUsesr = () => {
+    handleAddNewUser = () => {
         this.setState({
             isOpenModalUser: true,
         })
@@ -41,6 +42,28 @@ class UserManage extends Component {
         )
     }
 
+    createNewUser = async (data) => {
+        console.log('check in', data);
+        try {
+            //bug
+            let response = await createNewUserService(data);
+
+            if (response && response.errCode !== '0') {
+                alert(response.errMessage)
+                console.log('checklog done', response.errMessage);
+            }
+            else {
+                await this.getAllUserFromReact();//update lai table sau do
+                this.setState({
+                    isOpenModalUser: false,
+                })
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
     render() {
         let arrUsers = this.state.arrUsers;
         return (
@@ -48,12 +71,13 @@ class UserManage extends Component {
                 <ModalUser
                     isOpen={this.state.isOpenModalUser}
                     toggleFromParent={this.toggleUserModal}
-                >
-                </ModalUser>
+                    createNewUser={this.createNewUser} //why parent -> child func ko truyen params
+                // vi cha ko biet con truyen nhung param gi
+                />
                 <div className="title text-center">Manage</div>
                 <div className="mx-1">
                     <button className='btn btn-primary px-3'
-                        onClick={() => this.handleAddNewUsesr()}>
+                        onClick={() => this.handleAddNewUser()}>
                         <i className='fas fa-plus'></i> Add new User</button>
                 </div>
                 <div className="user-table mt-3 mx-1">
@@ -75,7 +99,7 @@ class UserManage extends Component {
  hạng thứ hai không bao giờ được tính toán, kết quả trả về là giá 
  trị falsy của toán hạng đầu. */}
                             {arrUsers && arrUsers.map((item, index) => {
-                                console.log('check map: ', item, index);
+                                // console.log('check map: ', item, index);
                                 return (
                                     <tr>
                                         <td>{item.email}</td>

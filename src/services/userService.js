@@ -11,7 +11,14 @@ const getAllUser = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 }
 
+// getAllUserFromReact
+const createNewUserService = (data) => {
+    console.log('check data create new user', data);
+    //bug
+    return axios.post('/api/create-new-user', data)
+}
 export {
     handleLoginApi,
-    getAllUser
+    getAllUser,
+    createNewUserService,
 }
