@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllUser, createNewUserService } from '../../services/userService';
+import { getAllUser, createNewUserService, deleteUserService } from '../../services/userService';
 import './UserManage.scss'
 import ModalUser from './ModalUser';
+import { emitter } from '../../utils/emitter';
 // import { reject } from 'lodash';
 class UserManage extends Component {
     // khoi tao state
@@ -57,12 +58,28 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModalUser: false,
                 })
+                emitter.emit('EVENT_CLEAR_MODAL_DATA')
+                // emitter.emit('EVENT_CLEAR_MODAL_DATA', { 'id': 'your id' })//truyen data
             }
         } catch (e) {
             console.log(e);
         }
     }
 
+    handleDeleteUser = async (user) => {
+        console.log('click delete', user);
+        try {
+            let res = await deleteUserService(user.id);
+            if (res && res.errCode === '0') {
+                await this.getAllUserFromReact();//update lai table sau do
+            }
+            else {
+                alert(res.errMessage)
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     render() {
         let arrUsers = this.state.arrUsers;
@@ -108,7 +125,7 @@ class UserManage extends Component {
                                         <td>{item.address}</td>
                                         <td>
                                             <button className='btn-edit'><i className='fas fa-pencil-alt'></i></button>
-                                            <button className='btn-delete'><i className='fas fa-trash'></i></button>
+                                            <button className='btn-delete' onClick={() => this.handleDeleteUser(item)}><i className='fas fa-trash'></i></button>
                                         </td>
                                     </tr>
                                 )
