@@ -1,7 +1,7 @@
 .home-header-container {
     height : 60px;
     width  : 100%;
-    padding: 0 20px;
+    padding: 0 40px;
 
     .home-header-content {
         width  : 100%;
@@ -9,16 +9,16 @@
         display: flex;
 
         .left-content {
-            width      : 25%;
-            border     : 1px solid green;
+            width      : 20%;
             display    : flex;
             align-items: center;
 
             .header-logo {
-                background: url(../../assets/logo.svg) center center no-repeat;
-                height    : 100%;
-                width     : 100%;
-                cursor    : pointer;
+                height     : 100%;
+                width      : 100%;
+                transform  : scale(0.5, 0.5);
+                margin-left: -45px;
+                cursor     : pointer;
             }
 
             i {
@@ -29,11 +29,11 @@
         }
 
         .center-content {
-            width          : 50%;
-            border         : 1px solid orange;
+            width          : 55%;
             display        : flex;
             justify-content: center;
             align-items    : center;
+            justify-content: space-between;
 
             .child-content {
                 .sub-title {
@@ -45,10 +45,40 @@
 
         .right-content {
             width          : 25%;
-            border         : 1px solid grey;
             display        : flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items    : center;
+
+            .support {
+                padding-right: 50px;
+                display      : flex;
+                align-items  : center;
+                cursor       : pointer;
+
+                i {
+                    font-size   : 15px;
+                    margin-right: 5px;
+                }
+            }
+
+            .language-vi {
+                cursor: pointer;
+
+                &.active {
+                    color: orange;
+                }
+
+                //&.active ~ ngang hang vs language-vi:  .active
+            }
+
+            .language-en {
+                margin: 0 10px;
+                cursor: pointer;
+
+                &.active {
+                    color: blue;
+                }
+            }
         }
     }
 }
@@ -61,10 +91,11 @@
     background-position: center;
 
     .content-up {
-        height : 50%;
-        padding: 15px 0 0 0;
+        height          : 65%;
+        padding         : 15px 0 0 0;
+        background-image: linear-gradient(rgba(126, 126, 126, 0.5), rgba(255, 255, 255, 0.1));
 
-        .title-1 {
+        .title1 {
             text-align   : center;
             font-size    : 30px;
             text-shadow  : 1px 1px 1px #333;
@@ -73,7 +104,7 @@
             margin-top   : 30px;
         }
 
-        .title-2 {
+        .title2 {
             text-align   : center;
             font-size    : 30px;
             text-shadow  : 1px 1px 1px #333;
@@ -107,7 +138,12 @@
     }
 
     .content-down {
-        height: 50%;
+        height          : 35%;
+        display         : flex;
+        align-items     : flex-end;
+        justify-content : center;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+
 
         .options {
             text-align     : center;

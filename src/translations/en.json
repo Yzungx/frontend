@@ -1,4 +1,25 @@
 {
+    "home-header": {
+        "speciality": "Medical speciality",
+        "searchdoctor": "Find doctor by specialty",
+        "health-facility": "Heath facilities",
+        "select-room": "Choose hopital or clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a good doctor",
+        "fee": "Checkup package ",
+        "check-health": "General heath check",
+        "support": "support"
+    },
+    "banner": {
+        "title1": "MEDICAL BACKGROUND",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "child1": "specialized examination",
+        "child2": "Romote examination",
+        "child3": "General examination",
+        "child4": "Medical test",
+        "child5": "Mental health",
+        "child6": "Dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
